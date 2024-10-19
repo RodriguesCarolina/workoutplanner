@@ -2,6 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.8.
 
+## Project Overview
+The Workout Planner app is an Angular-based application that allows users to plan their weekly workout routines. Users can:
+
+- Organize workouts by days of the week.
+- Add workout groups for each day (Legs, Push, Pull, Full Body, etc.).
+- Search for exercises from a workout API (ExerciseDB).
+- Customize each exercise with the number of sets, repetitions, and optional weights.
+- Save the workout plan for future use and track workout completion.
+
+## Features
+
+- **Weekly Workout Planner**: Organize your workouts by day, from Monday to Sunday.
+- **Workout Groups**: Create workout groups for each day (e.g., Legs, Push, Pull, Full Body).
+- **Exercise Search**: Search for exercises from an external workout API and add them to your workout plan.
+- **Customize Workouts**: Add sets, reps, and weights for each exercise.
+- **Save and Track**: Save your workout plan and track your progress throughout the week.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
