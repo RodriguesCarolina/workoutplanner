@@ -4,6 +4,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
     <!-- Calendar -->
     <div class="col-span-2 bg-white shadow-md rounded-lg p-6">
+      <h2 class="text-center font-bold mb-4">{{currentMonthName}}</h2>
       <!--Week header-->
       <div class="grid grid-cols-7 text-center font-bold text-lg border-b border-gray-200 pb-4 mb-4">
         <div>Mon</div>
@@ -14,39 +15,42 @@
         <div>Sat</div>
         <div>Sun</div>
       </div>
-      <!--Days Grid-->
-      <div class="grid grid-cols-7 gap-4">
-        @for (day of weekDays; track day) {
-          <!--<div class="font-bold">{{ day }}</div>-->
 
-          @if (workoutGroupsByDay[day]) {
-            <div class="mt-4 text-blue-600">
-              {{ workoutGroupsByDay[day] }}
-            </div>
+      <!-- Days Grid -->
+      <div class="grid grid-cols-7 gap-4">
+        @for (day of daysInMonth; track day) {
+          <!-- If it's an empty day (date 0), render a blank cell -->
+          @if (day.date === 0) {
+            <div class="p-4"></div>
           } @else {
-            <button class="bg-blue-500 text-white rounded-lg py-2 px-2 mt-4"
-                    (click)="addWorkoutGroup(day)">
-              Add workout group
-            </button>
+            <div class="p-3 border rounded-lg flex flex-col items-center justify-between h-24">
+              <div class="font-bold">{{ day.date }}</div>
+
+              <!-- Display workout group or Add button -->
+              @if (workoutGroupsByDay[day.date]) {
+                <div class="mt-2 mb-2 text-blue-600">
+                  {{ workoutGroupsByDay[day.date] }}
+                </div>
+              } @else {
+                <button class="bg-blue-500 text-white rounded-md py-1 px-2 text-xs hover:bg-blue-600 transition ease-in-out duration-300"
+                        (click)="addWorkoutGroup(day.date)">
+                  Add Group
+                </button>
+              }
+            </div>
           }
         }
       </div>
     </div>
 
+    <!-- Workout Details Sidebar -->
     <div class="bg-white shadow-md rounded-lg p-6">
       <!-- Display workout group details when a day is selected -->
       @if (selectedDay) {
         <div>
           <p class="text-lg font-semibold text-center">{{ selectedDay }}</p>
-
-          @if (workoutGroupsByDay[selectedDay]) {
-            <p>Workout Group: {{ workoutGroupsByDay[selectedDay] }}</p>
-          } @else {
-              <app-workout-group (groupSelected)="onGroupSelected($event)"></app-workout-group>
-          }
+          <app-workout-group (groupSelected)="onGroupSelected($event)"></app-workout-group>
         </div>
-      } @else {
-        <p>Select a day to see workout details.</p>
       }
     </div>
   </div>
