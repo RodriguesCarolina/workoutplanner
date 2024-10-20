@@ -1,0 +1,53 @@
+<div class="planner mx-auto py-10 max-w-7xl">
+  <h2 class="text-3xl font-bold text-center mb-10">Workout Plan</h2>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <!-- Calendar -->
+    <div class="col-span-2 bg-white shadow-md rounded-lg p-6">
+      <!--Week header-->
+      <div class="grid grid-cols-7 text-center font-bold text-lg border-b border-gray-200 pb-4 mb-4">
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+        <div>Sun</div>
+      </div>
+      <!--Days Grid-->
+      <div class="grid grid-cols-7 gap-4">
+        @for (day of weekDays; track day) {
+          <!--<div class="font-bold">{{ day }}</div>-->
+
+          @if (workoutGroupsByDay[day]) {
+            <div class="mt-4 text-blue-600">
+              {{ workoutGroupsByDay[day] }}
+            </div>
+          } @else {
+            <button class="bg-blue-500 text-white rounded-lg py-2 px-2 mt-4"
+                    (click)="addWorkoutGroup(day)">
+              Add workout group
+            </button>
+          }
+        }
+      </div>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6">
+      <!-- Display workout group details when a day is selected -->
+      @if (selectedDay) {
+        <div>
+          <p class="text-lg font-semibold text-center">{{ selectedDay }}</p>
+
+          @if (workoutGroupsByDay[selectedDay]) {
+            <p>Workout Group: {{ workoutGroupsByDay[selectedDay] }}</p>
+          } @else {
+              <app-workout-group (groupSelected)="onGroupSelected($event)"></app-workout-group>
+          }
+        </div>
+      } @else {
+        <p>Select a day to see workout details.</p>
+      }
+    </div>
+  </div>
+</div>

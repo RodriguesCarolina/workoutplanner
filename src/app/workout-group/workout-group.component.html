@@ -1,0 +1,18 @@
+<div>
+  <h3 class="text-2xl font-bold mb-4 text-gray-800">Select a Workout Group</h3>
+
+  <ul class="space-y-3">
+    @for (group of availableGroups; track group) {
+      <li
+        class="group p-4 border border-gray-300 rounded-lg cursor-pointer transition duration-300 hover:bg-blue-50 hover:border-blue-400"
+        (click)="selectGroup(group)">
+        <div class="flex items-center justify-between">
+          <span class="text-lg font-medium text-gray-700 group-hover:text-blue-600">{{ group }}</span>
+          <svg class="w-5 h-5 text-gray-400 group-hover:text-blue-600 transition" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </li>
+    }
+  </ul>
+</div>
